@@ -25,11 +25,10 @@ search_box.submit()
 wait = WebDriverWait(driver, 10)
 wait.until(EC.presence_of_element_located((By.ID, "search")))
 
-# Verify that the search results contain the expected text
-expected_text = "GitHub Actions"
-assert (
-    expected_text in driver.page_source
-), f"Expected text '{expected_text}' not found in page source"
+# Iterate over the search results and print their titles
+results = driver.find_elements(By.CSS_SELECTOR, "h3")
+for index, result in enumerate(results, start=1):
+    print(f"Result {index}: {result.text}")
 
 # Close the WebDriver
 driver.quit()
